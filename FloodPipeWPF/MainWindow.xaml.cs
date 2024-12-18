@@ -10,10 +10,8 @@ namespace FloodPipeWPF
         public MainWindow()
         {
             InitializeComponent();
-            
-            
         }
-        
+
         /// <summary>
         /// Min
         /// </summary>
@@ -21,9 +19,9 @@ namespace FloodPipeWPF
         /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState != WindowState.Minimized)
+            if (WindowState != WindowState.Minimized)
             {
-                this.WindowState = WindowState.Minimized;
+                WindowState = WindowState.Minimized;
             }
         }
 
@@ -34,13 +32,13 @@ namespace FloodPipeWPF
         /// <param name="e"></param>
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState != WindowState.Maximized)
+            if (WindowState != WindowState.Maximized)
             {
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
                 return;
             }
-            
-            this.WindowState = WindowState.Normal;
+
+            WindowState = WindowState.Normal;
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace FloodPipeWPF
         /// <param name="e"></param>
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace FloodPipeWPF
         /// <param name="e"></param>
         private void Rectangle_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            this.DragMove();
+            DragMove();
         }
     }
 }
