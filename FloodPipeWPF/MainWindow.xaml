@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FloodPipeWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Calendar Name="calendar" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        Title="Floodpipe with WPF"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency ="True"
+        WindowStyle="None"
+        Background="Transparent"
+        Height="450" Width="800">
+        
+    <Grid Background="#A0B00B10" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#00FFFFFF" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"></Rectangle>
+        <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="Auto">
+            <Button Width="20" Height="20" Margin="5" Click="Button_Click_1">_</Button>
+            <Button Width="20" Height="20" Margin="5" Click="Button_Click_2">口</Button>
+            <Button Width="20" Height="20" Margin="5" Click="Button_Click_3">X</Button>
+        </WrapPanel> 
     </Grid>
 </Window>
