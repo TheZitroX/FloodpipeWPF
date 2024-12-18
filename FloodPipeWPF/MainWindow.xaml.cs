@@ -58,6 +58,11 @@ namespace FloodPipeWPF
         /// <param name="e"></param>
         private void Rectangle_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (e.LeftButton != System.Windows.Input.MouseButtonState.Pressed)
+            {
+                return;
+            }
+            
             DragMove();
         }
     }
