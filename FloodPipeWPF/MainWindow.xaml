@@ -10,10 +10,23 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
-        Height="450" Width="800">
+        Width="800"
+        Height="450">
 
-    <Border Background="Gray" CornerRadius="10">
-        <Grid MouseLeftButtonDown="Rectangle_MouseLeftButtonDown">
+    <Border Width="800" Height="450" CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                <GradientStop Color="Cyan" Offset="-0.5" />
+                <GradientStop Color="#FF500040" Offset="0.3" />
+                <GradientStop Color="#FF00FFFF" Offset="2" />
+            </LinearGradientBrush>
+        </Border.Background>
+        
+        <Border.Clip>
+            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,800,450" />
+        </Border.Clip>
+
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition />
@@ -23,51 +36,42 @@
                 <RowDefinition Height="75" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <TextBlock Text="Floodpipe 2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Foreground="White"
                        FontSize="16"
                        Margin="10,0,0,0" />
-            
-            <StackPanel Grid.Row="1">
+
+            <StackPanel Grid.Row="1" 
+                        Background="#40000000">
                 <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" />
                 <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" />
                 <RadioButton Content="Settings"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" />
                 <RadioButton Content="Quit"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" />
             </StackPanel>
 
-            <!-- <Grid.RowDefinitions> -->
-            <!--     <RowDefinition Height="30"></RowDefinition> -->
-            <!--     <RowDefinition></RowDefinition> -->
-            <!-- </Grid.RowDefinitions> -->
-
-            <!-- <Rectangle  -->
-            <!--     Fill="#A0000000" -->
-            <!--     MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"> -->
-            <!-- </Rectangle> -->
-            <!-- <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="Auto"> -->
-            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_1">_</Button> -->
-            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_2">口</Button> -->
-            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_3">X</Button> -->
-            <!-- </WrapPanel>  -->
+            <ContentControl
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10" />
         </Grid>
     </Border>
 </Window>
