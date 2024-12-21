@@ -21,7 +21,7 @@
                 <GradientStop Color="#FF00FFFF" Offset="2" />
             </LinearGradientBrush>
         </Border.Background>
-        
+
         <Border.Clip>
             <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,800,450" />
         </Border.Clip>
@@ -44,28 +44,12 @@
                        FontSize="16"
                        Margin="10,0,0,0" />
 
-            <StackPanel Grid.Row="1" 
+            <StackPanel Grid.Row="1"
                         Background="#40000000">
-                <RadioButton Content="Home"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="Home"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="Settings"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="Quit"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton Content="Home" Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton Content="Home" Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton Content="Settings" Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton Content="Quit" Style="{StaticResource MenuButtonTheme}" />
             </StackPanel>
 
             <ContentControl
