@@ -7,26 +7,67 @@
         mc:Ignorable="d"
         Title="Floodpipe with WPF"
         WindowStartupLocation="CenterScreen"
-        AllowsTransparency ="True"
+        AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
         Height="450" Width="800">
-        
+
     <Border Background="Gray" CornerRadius="10">
         <Grid MouseLeftButtonDown="Rectangle_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="75" />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <Rectangle 
-                Fill="#A0000000"
-                MouseLeftButtonDown="Rectangle_MouseLeftButtonDown">
-            </Rectangle>
-            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="Auto">
-                <Button Width="20" Height="20" Margin="5" Click="Button_Click_1">_</Button>
-                <Button Width="20" Height="20" Margin="5" Click="Button_Click_2">口</Button>
-                <Button Width="20" Height="20" Margin="5" Click="Button_Click_3">X</Button>
-            </WrapPanel> 
+            
+            <TextBlock Text="Floodpipe 2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="16"
+                       Margin="10,0,0,0" />
+            
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Settings"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Quit"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+
+            <!-- <Grid.RowDefinitions> -->
+            <!--     <RowDefinition Height="30"></RowDefinition> -->
+            <!--     <RowDefinition></RowDefinition> -->
+            <!-- </Grid.RowDefinitions> -->
+
+            <!-- <Rectangle  -->
+            <!--     Fill="#A0000000" -->
+            <!--     MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"> -->
+            <!-- </Rectangle> -->
+            <!-- <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="Auto"> -->
+            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_1">_</Button> -->
+            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_2">口</Button> -->
+            <!--     <Button Width="20" Height="20" Margin="5" Click="Button_Click_3">X</Button> -->
+            <!-- </WrapPanel>  -->
         </Grid>
     </Border>
 </Window>
