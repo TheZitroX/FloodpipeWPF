@@ -4,32 +4,30 @@ namespace FloodPipeWPF.MVVM.ViewModel;
 
 public class MainViewModel : ObservableObject
 {
-    public RelayCommand HomeViewCommand { get; set; }
-    public RelayCommand DiscoverViewCommand { get; set; }
-    public RelayCommand QuitCommand { get; set; }
+    public RelayCommand HomeViewCommand { get; }
+    public RelayCommand DiscoverViewCommand { get; }
+    public RelayCommand QuitCommand { get; }
     
-    private object currentView;
-    private HomeViewModel homeViewModel;
-    private DiscoverViewModel discoverViewModel;
+    private readonly HomeViewModel _homeViewModel = new HomeViewModel();
+    private readonly DiscoverViewModel _discoverViewModel = new DiscoverViewModel();
+    private object _currentView = new HomeViewModel();
     
     public object CurrentView
     {
-        get => currentView;
+        get => _currentView;
         set 
         {
-            currentView = value;
+            _currentView = value;
             OnPropertyChanged();
         }
     }
     
     public MainViewModel()
     {
-        homeViewModel = new HomeViewModel();
-        discoverViewModel = new DiscoverViewModel();
+        CurrentView = _homeViewModel;
         
-        CurrentView = homeViewModel;
-        HomeViewCommand = new RelayCommand(o => { CurrentView = homeViewModel; });
-        DiscoverViewCommand = new RelayCommand(o => { CurrentView = discoverViewModel; });
+        HomeViewCommand = new RelayCommand(o => { CurrentView = _homeViewModel; });
+        DiscoverViewCommand = new RelayCommand(o => { CurrentView = _discoverViewModel; });
         QuitCommand = new RelayCommand(o => { Shutdown(); });
     }
 
