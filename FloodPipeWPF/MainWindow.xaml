@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FloodPipeWPF"
+        xmlns:viewModel="clr-namespace:FloodPipeWPF.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="Floodpipe with WPF"
         WindowStartupLocation="CenterScreen"
@@ -12,6 +13,10 @@
         Background="Transparent"
         Width="800"
         Height="450">
+    
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
     <Border Width="800" Height="450" CornerRadius="10">
         <Border.Background>
@@ -46,8 +51,15 @@
 
             <StackPanel Grid.Row="1"
                         Background="#40000000">
-                <RadioButton Content="Home" Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="Home" Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton 
+                    Content="Home"
+                    Style="{StaticResource MenuButtonTheme}"
+                    IsChecked="True"
+                    Command="{Binding HomeViewCommand}"/>
+                <RadioButton
+                    Content="Discover"
+                    Style="{StaticResource MenuButtonTheme}" 
+                    Command="{Binding DiscoverViewCommand}"/>
                 <RadioButton Content="Settings" Style="{StaticResource MenuButtonTheme}" />
                 <RadioButton Content="Quit" Style="{StaticResource MenuButtonTheme}" />
             </StackPanel>
@@ -55,7 +67,8 @@
             <ContentControl
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="10" />
+                Margin="10, 0, 10, 10"
+                Content="{Binding CurrentView}"/>
         </Grid>
     </Border>
 </Window>
