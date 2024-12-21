@@ -61,7 +61,10 @@
                     Style="{StaticResource MenuButtonTheme}" 
                     Command="{Binding DiscoverViewCommand}"/>
                 <RadioButton Content="Settings" Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="Quit" Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton
+                    Content="Quit"
+                    Style="{StaticResource MenuButtonTheme}" 
+                    Command="{Binding QuitCommand}"/>
             </StackPanel>
 
             <ContentControl

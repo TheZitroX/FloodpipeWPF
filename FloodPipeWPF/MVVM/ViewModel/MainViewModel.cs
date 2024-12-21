@@ -6,6 +6,7 @@ public class MainViewModel : ObservableObject
 {
     public RelayCommand HomeViewCommand { get; set; }
     public RelayCommand DiscoverViewCommand { get; set; }
+    public RelayCommand QuitCommand { get; set; }
     
     private object currentView;
     private HomeViewModel homeViewModel;
@@ -29,5 +30,11 @@ public class MainViewModel : ObservableObject
         CurrentView = homeViewModel;
         HomeViewCommand = new RelayCommand(o => { CurrentView = homeViewModel; });
         DiscoverViewCommand = new RelayCommand(o => { CurrentView = discoverViewModel; });
+        QuitCommand = new RelayCommand(o => { Shutdown(); });
+    }
+
+    private static void Shutdown()
+    {
+        System.Windows.Application.Current.Shutdown();
     }
 }
