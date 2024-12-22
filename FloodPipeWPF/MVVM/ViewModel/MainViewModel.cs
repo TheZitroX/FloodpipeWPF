@@ -8,8 +8,8 @@ public class MainViewModel : ObservableObject
     public RelayCommand DiscoverViewCommand { get; }
     public RelayCommand QuitCommand { get; }
     
-    private readonly HomeViewModel _homeViewModel = new HomeViewModel();
-    private readonly DiscoverViewModel _discoverViewModel = new DiscoverViewModel();
+    private readonly HomeViewModel _homeViewModel = new();
+    private readonly DiscoverViewModel _discoverViewModel = new();
     private object _currentView = new HomeViewModel();
     
     public object CurrentView
