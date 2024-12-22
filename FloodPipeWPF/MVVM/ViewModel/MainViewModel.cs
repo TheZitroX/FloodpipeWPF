@@ -10,7 +10,7 @@ public class MainViewModel : ObservableObject
     
     private readonly HomeViewModel _homeViewModel = new();
     private readonly DiscoverViewModel _discoverViewModel = new();
-    private object _currentView = new HomeViewModel();
+    private object _currentView;
     
     public object CurrentView
     {
@@ -24,7 +24,8 @@ public class MainViewModel : ObservableObject
     
     public MainViewModel()
     {
-        CurrentView = _homeViewModel;
+        _currentView = _homeViewModel;
+        CurrentView = _currentView;
         
         HomeViewCommand = new RelayCommand(o => { CurrentView = _homeViewModel; });
         DiscoverViewCommand = new RelayCommand(o => { CurrentView = _discoverViewModel; });
