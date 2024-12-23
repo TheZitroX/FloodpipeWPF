@@ -15,8 +15,8 @@
                  <view:HomeView/>
              </DataTemplate>
              
-             <DataTemplate DataType="{x:Type viewModel:DiscoverViewModel}">
-                 <view:DiscoverView/>
+             <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
+                 <view:GameView/>
              </DataTemplate>
          </ResourceDictionary>
     </Application.Resources>

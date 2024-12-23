@@ -1,10 +1,11 @@
 ﻿using System.Windows.Controls;
+using FloodPipeWPF.MVVM.ViewModel;
 
 namespace FloodPipeWPF.MVVM.View;
 
-public partial class DiscoverView : UserControl
+public partial class GameView : UserControl
 {
-    public DiscoverView()
+    public GameView()
     {
         InitializeComponent();
     }

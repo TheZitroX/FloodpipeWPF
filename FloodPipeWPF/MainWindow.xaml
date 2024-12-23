@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FloodPipeWPF"
         xmlns:viewModel="clr-namespace:FloodPipeWPF.MVVM.ViewModel"
+        d:DataContext="{d:DesignInstance viewModel:HomeViewModel}"
         mc:Ignorable="d"
         Title="Floodpipe with WPF"
         WindowStartupLocation="CenterScreen"
@@ -53,13 +54,13 @@
                         Background="#40000000">
                 <RadioButton 
                     Content="Home"
-                    Style="{StaticResource MenuButtonTheme}"
                     IsChecked="True"
+                    Style="{StaticResource MenuButtonTheme}"
                     Command="{Binding HomeViewCommand}"/>
                 <RadioButton
-                    Content="Discover"
+                    Content="Game"
                     Style="{StaticResource MenuButtonTheme}" 
-                    Command="{Binding DiscoverViewCommand}"/>
+                    Command="{Binding GameViewCommand}"/>
                 <RadioButton Content="Settings" Style="{StaticResource MenuButtonTheme}" />
                 <RadioButton
                     Content="Quit"
