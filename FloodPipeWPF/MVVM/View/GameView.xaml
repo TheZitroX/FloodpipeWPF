@@ -8,12 +8,37 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <StackPanel Background="#30000000">
+
+    <Grid Background="#30000000">
+        <!-- Define three rows: header, main content, and footer -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <!-- Header row takes only as much space as needed -->
+            <RowDefinition Height="*" />   <!-- Main content (ListBox) takes up the remaining space -->
+            <RowDefinition Height="Auto" /> <!-- Footer row takes only as much space as needed -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
         <TextBlock Text="Game"
                    Foreground="White"
                    FontSize="28"
-                   HorizontalAlignment="Left"
-                   Margin="0,0,0,20"/>
-        <ListBox ItemsSource="{Binding Items}" />
-    </StackPanel>
+                   HorizontalAlignment="Center"
+                   Margin="0,20,0,20"
+                   Grid.Row="0" />
+
+        <!-- Main content (ListBox) -->
+        <ListBox ItemsSource="{Binding Items}"
+                 Grid.Row="1"
+                 Margin="0,10,0,10" />
+
+        <!-- Footer (buttons) -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.Row="2"
+                    Margin="0,20,0,20">
+            <TextBox Width="200"
+                     Margin="0,0,10,0" />
+            <Button Content="Add"
+                    Width="100" />
+        </StackPanel>
+    </Grid>
 </UserControl>
