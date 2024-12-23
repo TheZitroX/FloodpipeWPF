@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FloodPipeWPF"
         xmlns:viewModel="clr-namespace:FloodPipeWPF.MVVM.ViewModel"
         d:DataContext="{d:DesignInstance viewModel:HomeViewModel}"
         mc:Ignorable="d"
@@ -19,7 +18,7 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Width="800" Height="450" CornerRadius="10">
+    <Border Width="800" Height="450" CornerRadius="10" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                 <GradientStop Color="Cyan" Offset="-0.5" />
