@@ -24,7 +24,7 @@ public class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
-        _currentView = _homeViewModel;
+        _currentView = _gameViewModel;
         CurrentView = _currentView;
 
         HomeViewCommand = new RelayCommand(o => SwitchToHomeView());
