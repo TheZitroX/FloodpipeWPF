@@ -22,29 +22,18 @@ public class FileStorageHandler
         _connection = new SQLiteConnection(ConnectionString);
         _connection.Open();
 
-        // Step 3: Create a table
         string createTableQuery = @"
             CREATE TABLE IF NOT EXISTS Users 
             (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Name TEXT NOT NULL,
-                Age INTEGER
+                Age INTEGER DEFAULT NULL
             );
         ";
 
         using (var command = new SQLiteCommand(createTableQuery, _connection))
-        {
             command.ExecuteNonQuery();
-        }
 
-        // Step 4: Insert data into the table
-        // string insertQuery = "INSERT INTO Users (Name, Age) VALUES ('Alice', 30), ('Bob', 25);";
-        // using (var command = new SQLiteCommand(insertQuery, _connection))
-        // {
-        //     command.ExecuteNonQuery();
-        // }
-
-        // Step 5: Query the data
         string selectQuery = "SELECT * FROM Users;";
         using (var command = new SQLiteCommand(selectQuery, _connection))
         using (var reader = command.ExecuteReader())
@@ -69,25 +58,7 @@ public class FileStorageHandler
 
         try
         {
-            // Ensure the connection is open
-            if (_connection.State != System.Data.ConnectionState.Open)
-                _connection.Open();
-
-            // Define the SQL query
-            string selectQuery = "SELECT Name FROM Users;";
-
-            // Execute the query and read the results
-            using (var command = new SQLiteCommand(selectQuery, _connection))
-            using (var reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    if ((reader["Name"] is not string name))
-                        continue;
-
-                    list.Add(name);
-                }
-            }
+            TryLoadingNamesFromDatabase(list);
         }
         catch (Exception ex)
         {
@@ -102,22 +73,32 @@ public class FileStorageHandler
         return list;
     }
 
+    private void TryLoadingNamesFromDatabase(List<string> list)
+    {
+        if (_connection.State != System.Data.ConnectionState.Open)
+            _connection.Open();
+
+        string selectQuery = "SELECT Name FROM Users;";
+        using var command = new SQLiteCommand(selectQuery, _connection);
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            if ((reader["Name"] is not string name))
+            {
+                Console.Error.WriteLine("Name is not a string");
+                
+                continue;
+            }
+
+            list.Add(name);
+        }
+    }
+
     public void AddName(string name)
     {
         try
         {
-            // Ensure the connection is open
-            if (_connection.State != System.Data.ConnectionState.Open)
-                _connection.Open();
-
-            // Define the SQL query
-            string insertQuery = $"INSERT INTO Users (Name) VALUES ('{name}');";
-
-            // Execute the query
-            using (var command = new SQLiteCommand(insertQuery, _connection))
-            {
-                command.ExecuteNonQuery();
-            }
+            TryAddingNameToDatabase(name);
         }
         catch (Exception ex)
         {
@@ -127,6 +108,20 @@ public class FileStorageHandler
         {
             if (_connection.State == System.Data.ConnectionState.Open)
                 _connection.Close();
+        }
+    }
+
+    private void TryAddingNameToDatabase(string name)
+    {
+        if (_connection.State != System.Data.ConnectionState.Open)
+            _connection.Open();
+
+        string insertQuery = "INSERT INTO Users (Name, Age) VALUES (@Name, @Age);";
+        using (var command = new SQLiteCommand(insertQuery, _connection))
+        {
+            command.Parameters.AddWithValue("@Name", name);
+            command.Parameters.AddWithValue("@Age", null);
+            command.ExecuteNonQuery();
         }
     }
 }
