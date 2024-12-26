@@ -28,7 +28,7 @@ public class FileStorageHandler
             (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Name TEXT NOT NULL,
-                Age INTEGER NOT NULL
+                Age INTEGER
             );
         ";
 
@@ -61,5 +61,72 @@ public class FileStorageHandler
     public void SaveNameList(List<string> names)
     {
         // Save the list of names to a file
+    }
+
+    public List<string> LoadNameList()
+    {
+        List<string> list = [];
+
+        try
+        {
+            // Ensure the connection is open
+            if (_connection.State != System.Data.ConnectionState.Open)
+                _connection.Open();
+
+            // Define the SQL query
+            string selectQuery = "SELECT Name FROM Users;";
+
+            // Execute the query and read the results
+            using (var command = new SQLiteCommand(selectQuery, _connection))
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if ((reader["Name"] is not string name))
+                        continue;
+
+                    list.Add(name);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading name list: {ex.Message}");
+        }
+        finally
+        {
+            if (_connection.State == System.Data.ConnectionState.Open)
+                _connection.Close();
+        }
+
+        return list;
+    }
+
+    public void AddName(string name)
+    {
+        try
+        {
+            // Ensure the connection is open
+            if (_connection.State != System.Data.ConnectionState.Open)
+                _connection.Open();
+
+            // Define the SQL query
+            string insertQuery = $"INSERT INTO Users (Name) VALUES ('{name}');";
+
+            // Execute the query
+            using (var command = new SQLiteCommand(insertQuery, _connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding name: {ex.Message}");
+        }
+        finally
+        {
+            if (_connection.State == System.Data.ConnectionState.Open)
+                _connection.Close();
+        }
     }
 }
