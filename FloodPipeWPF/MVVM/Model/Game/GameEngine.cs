@@ -1,7 +1,9 @@
-﻿namespace FloodPipeWPF.MVVM.Model.Game;
+﻿using System;
 
 using FloodPipeWPF.MVVM.Model.Persistence;
-using System;
+using GF = FloodPipeWPF.MVVM.Model.Game.GameField;
+
+namespace FloodPipeWPF.MVVM.Model.Game;
 
 public class GameEngine
 {
@@ -10,6 +12,7 @@ public class GameEngine
     public List<string> Items { get; private set; }
 
     private readonly FileStorageHandler _fileStorageHandler = new();
+    private readonly GF.GameField _gameField = new();
 
     public GameEngine()
     {
