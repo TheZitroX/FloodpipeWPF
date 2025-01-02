@@ -2,7 +2,10 @@
 
 public class GameField
 {
+    private List<Cell> _cells;
+
     public GameField()
     {
+        _cells = new();
     }
 }
