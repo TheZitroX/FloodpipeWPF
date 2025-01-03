@@ -1,4 +1,5 @@
 ﻿
+
 namespace FloodPipeWPF.MVVM.Model.Game.GameField;
 
 public class GameField
@@ -8,6 +9,11 @@ public class GameField
     public GameField()
     {
         _cellField = new();
+    }
+
+    internal void ClearField()
+    {
+        _cellField.ClearField();
     }
 
     internal void InitializeEmptyField(int width, int height)

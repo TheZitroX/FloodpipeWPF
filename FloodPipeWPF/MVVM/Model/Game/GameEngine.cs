@@ -18,7 +18,7 @@ public class GameEngine
     {
         Items = _fileStorageHandler.LoadNameList();
 
-        _gameField.InitializeEmptyField();
+        _gameField.InitializeEmptyField(1000, 1000);
     }
 
     public void AddItem(string item)
@@ -33,5 +33,10 @@ public class GameEngine
     {
         Items.Remove(item);
         ItemsUpdated?.Invoke(Items);
+    }
+
+    internal void Shutdown()
+    {
+        _gameField.ClearField();
     }
 }

@@ -57,4 +57,9 @@ public class GameViewModel : ObservableObject
         _gameEngine.AddItem(TextBoxValue);
         TextBoxValue = string.Empty;
     }
+
+    internal void Shutdown()
+    {
+        _gameEngine.Shutdown();
+    }
 }

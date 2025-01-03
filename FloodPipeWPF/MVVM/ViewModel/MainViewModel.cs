@@ -42,8 +42,9 @@ public class MainViewModel : ObservableObject
         CurrentView = _homeViewModel;
     }
 
-    private static void Shutdown()
+    private void Shutdown()
     {
+        _gameViewModel.Shutdown();
         System.Windows.Application.Current.Shutdown();
     }
 }

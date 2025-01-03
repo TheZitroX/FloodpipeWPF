@@ -15,6 +15,11 @@ public class CellField
         _cells = new();
     }
 
+    internal void ClearField()
+    {
+        CellFunctions.ClearField(_cells);
+    }
+
     internal void CreateEmptyField(int width, int height)
     {
         CellFunctions.CreateField(_cells, width, height);

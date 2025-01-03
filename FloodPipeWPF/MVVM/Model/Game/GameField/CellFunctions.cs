@@ -8,9 +8,22 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
 {
     internal class CellFunctions
     {
+        internal static void ClearField(List<List<Cell>> cells)
+        {
+            for(int i = 0; i < cells.Count; i++)
+            {
+                for (int j = 0; j < cells[i].Count; j++)
+                {
+                    cells[i].Clear();
+                }
+            }
+
+            cells.Clear();
+        }
+
         internal static void CreateField(List<List<Cell>> cells, int width, int height)
         {
-            cells.Clear();
+            ClearField(cells);
 
             for (int i = 0; i < height; i++)
             {
