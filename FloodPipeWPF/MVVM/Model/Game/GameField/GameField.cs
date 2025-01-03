@@ -1,11 +1,17 @@
-﻿namespace FloodPipeWPF.MVVM.Model.Game.GameField;
+﻿
+namespace FloodPipeWPF.MVVM.Model.Game.GameField;
 
 public class GameField
 {
-    private List<Cell> _cells;
+    private CellField _cellField;
 
     public GameField()
     {
-        _cells = new();
+        _cellField = new();
+    }
+
+    internal void InitializeEmptyField(int width, int height)
+    {
+        _cellField.CreateEmptyField(width, height);
     }
 }

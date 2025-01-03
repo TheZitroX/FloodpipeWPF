@@ -17,6 +17,8 @@ public class GameEngine
     public GameEngine()
     {
         Items = _fileStorageHandler.LoadNameList();
+
+        _gameField.InitializeEmptyField();
     }
 
     public void AddItem(string item)
