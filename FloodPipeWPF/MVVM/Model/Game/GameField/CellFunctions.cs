@@ -10,14 +10,6 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
     {
         internal static void ClearField(List<List<Cell>> cells)
         {
-            for(int i = 0; i < cells.Count; i++)
-            {
-                for (int j = 0; j < cells[i].Count; j++)
-                {
-                    cells[i].Clear();
-                }
-            }
-
             cells.Clear();
         }
 
