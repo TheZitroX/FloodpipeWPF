@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 namespace FloodPipeWPF.MVVM.Model.Game.GameField
 {
@@ -22,7 +18,8 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
                 cells.Add([]);
                 for (int j = 0; j < width; j++)
                 {
-                    cells[i].Add(new Cell(CellType.EMPTY));
+                    var pos = new Vector2(i, j);
+                    cells[i].Add(new Cell(CellType.EMPTY, pos));
                 }
             }
         }

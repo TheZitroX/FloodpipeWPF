@@ -1,6 +1,4 @@
-﻿
-
-namespace FloodPipeWPF.MVVM.Model.Game.GameField;
+﻿namespace FloodPipeWPF.MVVM.Model.Game.GameField;
 
 public class GameField
 {
@@ -16,8 +14,14 @@ public class GameField
         _cellField.ClearField();
     }
 
+    internal void HandleQueue()
+    {
+        throw new NotImplementedException();
+    }
+
     internal void InitializeEmptyField(int width, int height)
     {
         _cellField.CreateEmptyField(width, height);
     }
 }
+

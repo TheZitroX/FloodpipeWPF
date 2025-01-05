@@ -1,6 +1,4 @@
-﻿using System;
-
-using FloodPipeWPF.MVVM.Model.Persistence;
+﻿using FloodPipeWPF.MVVM.Model.Persistence;
 using GF = FloodPipeWPF.MVVM.Model.Game.GameField;
 
 namespace FloodPipeWPF.MVVM.Model.Game;
@@ -38,5 +36,19 @@ public class GameEngine
     internal void Shutdown()
     {
         _gameField.ClearField();
+    }
+
+    internal void StartSimulation()
+    {
+        // todo maybe create a new thread for this task until queue is empty
+        _gameField.HandleQueue();
+
+        // join the thread
+        OnSimulationFinished();
+    }
+
+    private void OnSimulationFinished()
+    {
+        // todo maybe notify the user that the simulation is finished
     }
 }
