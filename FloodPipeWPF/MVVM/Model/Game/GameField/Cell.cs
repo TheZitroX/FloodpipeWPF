@@ -94,7 +94,42 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
         public int Rotation
         {
             get => _rotation;
-            set => _rotation = value;
+        }
+
+        public void RotateClockwise()
+        {
+            _rotation = (_rotation + 1) % 4;
+            RotateConnectionsClockwise();
+        }
+
+        public void RotateCounterClockwise()
+        {
+            _rotation = (_rotation - 1 + 4) % 4;
+            RotateConnectionsCounterClockwise();
+        }
+
+        private void RotateConnectionsCounterClockwise()
+        {
+            for (int i = 0; i < _relativeConnections.Count; i++)
+            {
+                var connection = _relativeConnections[i];
+                var temp = connection.X;
+                connection.X = -connection.Y;
+                connection.Y = temp;
+                _relativeConnections[i] = connection;
+            }
+        }
+
+        private void RotateConnectionsClockwise()
+        {
+            for (int i = 0; i < _relativeConnections.Count; i++)
+            {
+                var connection = _relativeConnections[i];
+                var temp = connection.X;
+                connection.X = connection.Y;
+                connection.Y = -temp;
+                _relativeConnections[i] = connection;
+            }
         }
     }
 }
