@@ -31,9 +31,26 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
             _type = cellType;
             _position = position;
             _cellState = cellState;
-            _rotation = rotation;
+            _rotation = 0; // getting updated by Rotation below
 
             CreateCellConnectionsOnCellType();
+            switch (rotation)
+            {
+                case 0:
+                    break;
+                case 1:
+                    RotateClockwise();
+                    break;
+                case 2:
+                    RotateClockwise();
+                    RotateClockwise();
+                    break;
+                case 3:
+                    RotateCounterClockwise();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void CreateCellConnectionsOnCellType()
