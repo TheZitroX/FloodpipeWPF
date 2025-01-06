@@ -59,6 +59,55 @@ namespace FloodPipeWPF.UnitTests
             Assert.AreEqual(cell.RelativeConnections.Count, 2);
             Assert.AreEqual(cell.Rotation, 0);
         }
+
+        [TestMethod]
+        public void RotateClockwise_TJunctionCell_RotatedTJunctionCell()
+        {
+            var cell = new Cell(CellType.T_JUNCTION, new Vector2(0, 0));
+
+            cell.RotateClockwise();
+
+            var connections = cell.RelativeConnections;
+            Assert.IsNotNull(connections);
+            Assert.AreEqual(connections.Count, 3);
+            Assert.AreEqual(connections[0], new Vector2(1, 0));
+            Assert.AreEqual(connections[1], new Vector2(0, -1));
+            Assert.AreEqual(connections[2], new Vector2(0, 1));
+            Assert.AreEqual(cell.Rotation, 1);
+        }
+
+        [TestMethod]
+        public void RotateCounterClockwise_TJunctionCell_RotatedTJunctionCell()
+        {
+            var cell = new Cell(CellType.T_JUNCTION, new Vector2(0, 0));
+
+            cell.RotateCounterClockwise();
+
+            var connections = cell.RelativeConnections;
+            Assert.IsNotNull(connections);
+            Assert.AreEqual(connections.Count, 3);
+            Assert.AreEqual(connections[0], new Vector2(-1, 0));
+            Assert.AreEqual(connections[1], new Vector2(0, 1));
+            Assert.AreEqual(connections[2], new Vector2(0, -1));
+            Assert.AreEqual(cell.Rotation, 3);
+        }
+
+        [TestMethod]
+        public void RotateClockwiseAndCounterClockwise_TJunctionCell_OriginalTJunctionCell()
+        {
+            var cell = new Cell(CellType.T_JUNCTION, new Vector2(0, 0));
+
+            cell.RotateClockwise();
+            cell.RotateCounterClockwise();
+
+            var connections = cell.RelativeConnections;
+            Assert.IsNotNull(connections);
+            Assert.AreEqual(connections.Count, 3);
+            Assert.AreEqual(connections[0], new Vector2(0, 1));
+            Assert.AreEqual(connections[1], new Vector2(1, 0));
+            Assert.AreEqual(connections[2], new Vector2(-1, 0));
+            Assert.AreEqual(cell.Rotation, 0);
+        }
     }
 
     [TestClass]
