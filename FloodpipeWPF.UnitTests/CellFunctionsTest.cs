@@ -61,6 +61,24 @@ namespace FloodPipeWPF.UnitTests
         }
 
         [TestMethod]
+        public void CreateCell_RotatedTJunctionCell_RotatedTJunctionCell()
+        {
+            var cell = new Cell(CellType.T_JUNCTION, new Vector2(0, 0), 2);
+
+            var connections = cell.RelativeConnections;
+
+            Assert.IsNotNull(connections);
+            Assert.AreEqual(connections.Count, 3);
+            Assert.AreEqual(connections[0], new Vector2(0, -1));
+            Assert.AreEqual(connections[1], new Vector2(-1, 0));
+            Assert.AreEqual(connections[2], new Vector2(1, 0));
+            Assert.AreEqual(cell.Type, CellType.T_JUNCTION);
+            Assert.AreEqual(cell.Position, new Vector2(0, 0));
+            Assert.AreEqual(cell.CellState, CellState.EMPTY);
+            Assert.AreEqual(cell.Rotation, 2);
+        }
+
+        [TestMethod]
         public void RotateClockwise_TJunctionCell_RotatedTJunctionCell()
         {
             var cell = new Cell(CellType.T_JUNCTION, new Vector2(0, 0));
