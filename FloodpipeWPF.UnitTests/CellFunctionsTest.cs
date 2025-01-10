@@ -206,5 +206,49 @@ namespace FloodPipeWPF.UnitTests
             Assert.AreEqual(cells[1][0].Rotation, 0);
             Assert.AreEqual(cells[1][1].Rotation, 0);
         }
+
+        [TestMethod]
+        public void IsCellPositionValid_ValidPosition_True()
+        {
+            var cell = new Cell(CellType.EMPTY, new Vector2(0, 0));
+            Assert.IsTrue(CellFunctions.IsCellPositionValid(cell, 10, 10));
+        }
+
+        [TestMethod]
+        public void IsCellPositionValid_InvalidPosition_False()
+        {
+            var cell = new Cell(CellType.EMPTY, new Vector2(10, 10));
+            Assert.IsFalse(CellFunctions.IsCellPositionValid(cell, 10, 10));
+        }
+
+        [TestMethod]
+        public void IsCellConnectedToCell_ConnectedCells_True()
+        {
+            var cell1 = new Cell(CellType.CROSS, new Vector2(0, 0));
+            var cell2 = new Cell(CellType.CROSS, new Vector2(0, 1));
+            Assert.IsTrue(CellFunctions.IsCellConnectedToCell(cell1, cell2));
+        }
+
+        [TestMethod]
+        public void IsCellConnectedToCell_NotConnectedCells_False()
+        {
+            var cell1 = new Cell(CellType.CROSS, new Vector2(0, 0));
+            var cell2 = new Cell(CellType.CROSS, new Vector2(1, 1));
+            Assert.IsFalse(CellFunctions.IsCellConnectedToCell(cell1, cell2));
+        }
+
+        [TestMethod]
+        public void IsCellEmpty_EmptyCell_True()
+        {
+            var cell = new Cell(CellType.EMPTY, new Vector2(0, 0));
+            Assert.IsTrue(CellFunctions.IsCellEmpty(cell));
+        }
+
+        [TestMethod]
+        public void IsCellEmpty_FilledCell_False()
+        {
+            var cell = new Cell(CellType.CROSS, new Vector2(0, 0), 0, CellState.FULL);
+            Assert.IsFalse(CellFunctions.IsCellEmpty(cell));
+        }
     }
 }
