@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Windows;
 
 namespace FloodPipeWPF.MVVM.Model.Game.GameField
 {
@@ -22,6 +23,37 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
                     cells[i].Add(new Cell(CellType.EMPTY, pos));
                 }
             }
+        }
+
+        public static bool IsCellPositionValid(Cell cell, int width, int height)
+        {
+            return cell.Position.X >= 0 && cell.Position.X < width && cell.Position.Y >= 0 && cell.Position.Y < height;
+        }
+
+        public static bool IsCellConnectedToCell(Cell cell1, Cell cell2)
+        {
+            var cell1_connections = cell1.RelativeConnections;
+            var cell2_connections = cell2.RelativeConnections;
+            var cell1_pos = cell1.Position;
+            var cell2_pos = cell2.Position;
+
+            foreach (var connection1 in cell1_connections)
+            {
+                foreach (var connection2 in cell2_connections)
+                {
+                    if (cell1_pos + connection1 == cell2_pos && cell2_pos + connection2 == cell1_pos)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsCellEmpty(Cell cell)
+        {
+            return cell.CellState == CellState.EMPTY;
         }
     }
 }
