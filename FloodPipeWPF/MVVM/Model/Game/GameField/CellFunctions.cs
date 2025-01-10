@@ -55,5 +55,23 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
         {
             return cell.CellState == CellState.EMPTY;
         }
+
+        public static List<Cell> GetConnectedEmptyCells(Cell cell, List<List<Cell>> cells)
+        {
+            var connectedEmptyCells = new List<Cell>();
+
+            foreach (var connection in cell.RelativeConnections)
+            {
+                var position = cell.Position + connection;
+                var connectedCell = cells[(int)position.X][(int)position.Y];
+                
+                if (IsCellEmpty(connectedCell))
+                {
+                    connectedEmptyCells.Add(connectedCell);
+                }
+            }
+
+            return connectedEmptyCells;
+        }
     }
 }
