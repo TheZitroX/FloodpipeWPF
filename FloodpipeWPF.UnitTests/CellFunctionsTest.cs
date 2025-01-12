@@ -280,11 +280,27 @@ namespace FloodPipeWPF.UnitTests
             CellFunctions.ChangeCellInField(cells, 0, 1, CellType.CROSS);
             CellFunctions.ChangeCellInField(cells, 1, 0, CellType.CROSS);
 
-
             var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells, 2, 2);
             Assert.AreEqual(2, connectedEmptyCells.Count);
             Assert.IsTrue(connectedEmptyCells.Contains(cells[0][1]));
             Assert.IsTrue(connectedEmptyCells.Contains(cells[1][0]));
+            Assert.IsFalse(connectedEmptyCells.Contains(cells[1][1]));
+        }
+
+        [TestMethod]
+        public void GetConnectedEmptyCells_EmptyCellWithConnectedEmptyCellsAndFilledCell_ConnectedEmptyCells()
+        {
+            var cells = new List<List<Cell>>();
+            CellFunctions.CreateField(cells, 2, 2);
+            CellFunctions.ChangeCellInField(cells, 0, 0, CellType.CROSS);
+            CellFunctions.ChangeCellInField(cells, 0, 1, CellType.CROSS);
+            CellFunctions.ChangeCellInField(cells, 1, 0, CellType.CROSS);
+            cells[1][0].CellState = CellState.FULL;
+
+            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells, 2, 2);
+            Assert.AreEqual(1, connectedEmptyCells.Count);
+            Assert.IsTrue(connectedEmptyCells.Contains(cells[0][1]));
+            Assert.IsFalse(connectedEmptyCells.Contains(cells[1][0]));
             Assert.IsFalse(connectedEmptyCells.Contains(cells[1][1]));
         }
     }
