@@ -211,14 +211,14 @@ namespace FloodPipeWPF.UnitTests
         public void IsCellPositionValid_ValidPosition_True()
         {
             var cell = new Cell(CellType.EMPTY, new Vector2(0, 0));
-            Assert.IsTrue(CellFunctions.IsCellPositionValid(cell, 10, 10));
+            Assert.IsTrue(CellFunctions.IsCellPositionValid(cell.Position, 10, 10));
         }
 
         [TestMethod]
         public void IsCellPositionValid_InvalidPosition_False()
         {
             var cell = new Cell(CellType.EMPTY, new Vector2(10, 10));
-            Assert.IsFalse(CellFunctions.IsCellPositionValid(cell, 10, 10));
+            Assert.IsFalse(CellFunctions.IsCellPositionValid(cell.Position, 10, 10));
         }
 
         [TestMethod]
@@ -256,7 +256,7 @@ namespace FloodPipeWPF.UnitTests
         {
             var cells = new List<List<Cell>>();
             CellFunctions.CreateField(cells, 2, 2);
-            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells);
+            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells, 2, 2);
             Assert.AreEqual(connectedEmptyCells.Count, 0);
         }
         
@@ -266,7 +266,7 @@ namespace FloodPipeWPF.UnitTests
             var cells = new List<List<Cell>>();
             CellFunctions.CreateField(cells, 2, 2);
             cells[0][0].CellState = CellState.FULL;
-            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells);
+            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells, 2, 2);
             Assert.AreEqual(connectedEmptyCells.Count, 0);
         }
         
@@ -275,14 +275,17 @@ namespace FloodPipeWPF.UnitTests
         {
             var cells = new List<List<Cell>>();
             CellFunctions.CreateField(cells, 2, 2);
-            cells[0][0].CellState = CellState.EMPTY;
-            cells[0][1].CellState = CellState.EMPTY;
-            cells[1][0].CellState = CellState.EMPTY;
-            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells);
-            Assert.AreEqual(connectedEmptyCells.Count, 3);
+
+            CellFunctions.ChangeCellInField(cells, 0, 0, CellType.CROSS);
+            CellFunctions.ChangeCellInField(cells, 0, 1, CellType.CROSS);
+            CellFunctions.ChangeCellInField(cells, 1, 0, CellType.CROSS);
+
+
+            var connectedEmptyCells = CellFunctions.GetConnectedEmptyCells(cells[0][0], cells, 2, 2);
+            Assert.AreEqual(2, connectedEmptyCells.Count);
             Assert.IsTrue(connectedEmptyCells.Contains(cells[0][1]));
             Assert.IsTrue(connectedEmptyCells.Contains(cells[1][0]));
-            Assert.IsTrue(connectedEmptyCells.Contains(cells[1][1]));
+            Assert.IsFalse(connectedEmptyCells.Contains(cells[1][1]));
         }
     }
 }

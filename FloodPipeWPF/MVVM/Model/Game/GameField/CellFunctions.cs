@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace FloodPipeWPF.MVVM.Model.Game.GameField
 {
@@ -25,9 +26,9 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
             }
         }
 
-        public static bool IsCellPositionValid(Cell cell, int width, int height)
+        public static bool IsCellPositionValid(Vector2 cell, int width, int height)
         {
-            return cell.Position.X >= 0 && cell.Position.X < width && cell.Position.Y >= 0 && cell.Position.Y < height;
+            return cell.X >= 0 && cell.X < width && cell.Y >= 0 && cell.Y < height;
         }
 
         public static bool IsCellConnectedToCell(Cell cell1, Cell cell2)
@@ -56,13 +57,16 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
             return cell.CellState == CellState.EMPTY;
         }
 
-        public static List<Cell> GetConnectedEmptyCells(Cell cell, List<List<Cell>> cells)
+        public static List<Cell> GetConnectedEmptyCells(Cell cell, List<List<Cell>> cells, int cellFieldWidth, int cellFieldHeight)
         {
             var connectedEmptyCells = new List<Cell>();
 
             foreach (var connection in cell.RelativeConnections)
             {
                 var position = cell.Position + connection;
+                if (!IsCellPositionValid(position, cellFieldWidth, cellFieldHeight))
+                    continue;
+
                 var connectedCell = cells[(int)position.X][(int)position.Y];
                 
                 if (IsCellEmpty(connectedCell))
@@ -72,6 +76,17 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
             }
 
             return connectedEmptyCells;
+        }
+
+        public static void ChangeCellInField(List<List<Cell>> cells, int v1, int v2, CellType cellType)
+        {
+            var cell = cells[v1][v2];
+
+            if (cell.Type == cellType)
+                return;
+
+            cell = new Cell(cellType, cell.Position, cell.Rotation, cell.CellState);
+            cells[v1][v2] = cell;
         }
     }
 }
