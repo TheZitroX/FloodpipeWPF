@@ -78,15 +78,15 @@ namespace FloodPipeWPF.MVVM.Model.Game.GameField
             return connectedEmptyCells;
         }
 
-        public static void ChangeCellInField(List<List<Cell>> cells, int v1, int v2, CellType cellType)
+        public static void ChangeCellInField(List<List<Cell>> cells, int posX, int posY, CellType cellType)
         {
-            var cell = cells[v1][v2];
+            var cell = cells[posX][posY];
 
             if (cell.Type == cellType)
                 return;
 
             cell = new Cell(cellType, cell.Position, cell.Rotation, cell.CellState);
-            cells[v1][v2] = cell;
+            cells[posX][posY] = cell;
         }
     }
 }
